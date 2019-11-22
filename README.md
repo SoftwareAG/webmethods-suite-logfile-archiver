@@ -63,8 +63,9 @@ ant -f build_log-archive.xml -DretentionDays=12
 ````
 
 The following parameters can be used
+
 | Name | Default | Format | Description | Min. Version |
-| ---    | ---       | ---      | ---           | ---            |
+| ---  | ---     | ---    | ---         | ---          |
 | `webMethods.home` | OS environment variable `$WEBMETHODS_HOME` | Valid path | Location of the webMethods installation | 1.0 |
 | `createZIP` | true | true/false | Should a ZIP be created per invocation | 1.1 |
 | `retentionDays` | 30 | positive number | Number after which log files (not ZIP) shall be deleted | 1.0 |
