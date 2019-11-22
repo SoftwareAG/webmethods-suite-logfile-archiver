@@ -37,7 +37,7 @@ Archive and (after a customizable retention period) delete log files from webMet
 
 The script files' (`run_log-archive.bat` and `run_log-archive.sh`) logic is such that on a normal system no further setup work is required. But on systems where a more elaborate configuration exists, those specifics are taken into account. Therefore the following environment variables are used (if they are all defined, the archiver files can be stored anywhere):
 
-- `WEBMETHODS_HOME`: Installation location of the webMethods Suite for which the log files should be archived. If not defined, it will be assumed that the script is installed in `$WEBMETHODS_HOME/tools/operations` and the value derived from that.
+- `WEBMETHODS_HOME`: Installation location of the webMethods Suite for which the log files should be archived. If not defined, it will be assumed that the script is installed in `$WEBMETHODS_HOME/tools/operations/logArchiver` and the value derived from that.
 - `JAVA_HOME`: 
   - On Linux only and if it is not set, the script uses the contents of `/etc/profile.d/jdk.sh` if it exists. 
   - If not defined, the JVM that comes with the webMethods Suite will be used (depends on name of JVM folder and may therefore not work on all versions of the webMethods Suite).
