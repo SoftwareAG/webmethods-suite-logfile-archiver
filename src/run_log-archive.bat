@@ -1,8 +1,22 @@
 @echo off
 
-rem   (c) Copyright 2012 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
+rem   (c) Copyright 2012-2019 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
 rem   Reston, United States of America, and/or their suppliers.
 rem   http://www.softwareag.com
+rem
+rem SPDX-License-Identifier: Apache-2.0
+rem
+rem   Licensed under the Apache License, Version 2.0 (the "License");
+rem   you may not use this file except in compliance with the License.
+rem   You may obtain a copy of the License at
+rem
+rem       http://www.apache.org/licenses/LICENSE-2.0
+rem
+rem   Unless required by applicable law or agreed to in writing, software
+rem   distributed under the License is distributed on an "AS IS" BASIS,
+rem   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+rem   See the License for the specific language governing permissions and
+rem   limitations under the License.
 
 
 rem   NAME
@@ -45,7 +59,7 @@ set RETENTION_DAYS=30
 
 
 set CHECK_ANT_INSTALLATIONS=..\apache-ant ..\..\common\AssetBuildEnvironment\ant
-set CHECK_JAVA_INSTALLATIONS=..\..\jvm\jvm160_64 ..\..\jvm\jvm160_32 ..\..\jvm\jvm160
+set CHECK_JAVA_INSTALLATIONS=..\..\jvm\jvm180_64 ..\..\jvm\jvm180_32 ..\..\jvm\jvm180
 
 
 rem   Use optional command line argument to specify/override the 

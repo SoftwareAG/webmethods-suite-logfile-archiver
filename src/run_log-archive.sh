@@ -1,8 +1,22 @@
 #!/bin/sh
 
-# (c) Copyright 2012 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
+# (c) Copyright 2012-2019 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
 # Reston, United States of America, and/or their suppliers.
 # http://www.softwareag.com
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
 
 
 # NAME
@@ -51,7 +65,7 @@ fi
 
 CHECK_ANT_INSTALLATIONS="../apache-ant ../../common/AssetBuildEnvironment/ant"
 CHECK_ANT_PROFILE="/etc/profile.d/ant.sh"
-CHECK_JAVA_INSTALLATIONS="../../jvm/jvm160_64 ../../jvm/jvm160_32 ../../jvm/jvm160"
+CHECK_JAVA_INSTALLATIONS="../../jvm/jvm180_64 ../../jvm/jvm180_32 ../../jvm/jvm180"
 CHECK_JAVA_PROFILE="/etc/profile.d/jdk.sh"
 
 # Use optional command line argument to specify/override the 
