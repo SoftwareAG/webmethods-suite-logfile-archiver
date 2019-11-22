@@ -40,7 +40,7 @@ rem
 rem       WEBMETHODS_HOME
 rem            If not set (either system-wide or from the command line), it will
 rem            be determined by taking this script's location, assuming the latter is
-rem            $WEBMETHODS_HOME/tools/operations
+rem            $WEBMETHODS_HOME/tools/operations/logArchiver
 rem  
 rem       JAVA_HOME
 rem            The JVM that comes with the webMethods Suite will be used.
@@ -70,9 +70,9 @@ if not "%1"=="" (
 
 rem   If no installation directory is defined or provided,
 rem   determine it from this script's location, assuming the
-rem   script is installed in $WEBMETHODS_HOME/tools/operations
+rem   script is installed in $WEBMETHODS_HOME/tools/operations/logArchiver
 if "%WEBMETHODS_HOME%"=="" (
-	WEBMETHODS_HOME=%~dp0..\..
+	WEBMETHODS_HOME=%~dp0..\..\..
 )
 
 

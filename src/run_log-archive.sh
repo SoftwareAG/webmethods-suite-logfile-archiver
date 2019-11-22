@@ -40,7 +40,7 @@
 #     WEBMETHODS_HOME
 #          If not set (either system-wide or from the command line), it will
 #          be determined by taking this script's location, assuming the latter is
-#          $WEBMETHODS_HOME/tools/operations
+#          $WEBMETHODS_HOME/tools/operations/logArchiver
 #
 #     JAVA_HOME
 #          The JVM that comes with the webMethods Suite will be used.
@@ -76,9 +76,9 @@ fi
 
 # If no installation directory is defined or provided,
 # determine it from this script's location, assuming the
-# script is installed in $WEBMETHODS_HOME/tools/operations
+# script is installed in $WEBMETHODS_HOME/tools/operations/logArchiver
 if [ -z "$WEBMETHODS_HOME" ] ; then 
-	WEBMETHODS_HOME=`dirname $(readlink -f $0)`/../..
+	WEBMETHODS_HOME=`dirname $(readlink -f $0)`/../../..
 fi
 
 echo WEBMETHODS_HOME = "$WEBMETHODS_HOME"
