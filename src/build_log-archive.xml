@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<project name="wmLogArchiver" default="delete" basedir="." xmlns:antcontrib="antlib:net.sf.antcontrib">
+
+	<!--
+ (c) Copyright 2014 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
+ Reston, United States of America, and/or their suppliers.
+ http://www.softwareag.com
+  -->
+
+	<!-- CREATE TASK DEFINITIONS FOR ANT CONTRIB TASKS -->
+	<taskdef uri="antlib:net.sf.antcontrib" resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<path>
+				<fileset dir="${basedir}">
+					<include name="ant-contrib-1.0b3.jar" />
+				</fileset>
+			</path>
+		</classpath>
+	</taskdef>
+
+	<tstamp>
+		<format property="currentDate" pattern="yyyyMMdd" />
+	</tstamp>
+
+	<tstamp>
+		<format property="currentDateFileName" pattern="yyyy-MM-dd_HH-mm-ss-SSS" />
+	</tstamp>
+
+
+	<!-- Location of webMethods Suite on file system -->
+	<property environment="env" />
+	<condition property="webMethods.home" value="${env.WEBMETHODS_HOME}">
+		<not>
+			<isset property="webMethods.home" />
+		</not>
+	</condition>
+
+	<!--Should ZIP files be created? -->
+	<property name="createZIP" value="true" />
+
+	<!-- Number of days after which to delete archived raw files (not ZIP files) -->
+	<property name="retentionDays" value="30" />
+
+	<!-- Number of days after which to delete archived raw files (not ZIP files) -->
+	<property name="retentionDaysZIP" value="60" />
+
+	<!-- Name of Integration Server instance (only for v9.6 or higher) -->
+	<property name="instancesNameIS" value="default" />
+
+	<!-- Does Integration Server need special handling because version is 9.6 or higher? -->
+	<available file="${webMethods.home}/IntegrationServer/instances/${instancesNameIS}" property="log.dir.is.instance" value="/instances/${instancesNameIS}" />
+	<property name="log.dir.is.instance" value="" />
+	<available file="${webMethods.home}/IntegrationServer/instances/${instancesNameIS}" property="zip.instance.is" value="_${instancesNameIS}" />
+	
+	<!-- Name of Universal Messaging instance  -->
+	<property name="instanceNameUM" value="umserver" />
+
+	<!-- From where to move log files -->
+	<property name="log.dir.is" location="${webMethods.home}/IntegrationServer${log.dir.is.instance}/logs" />
+	<property name="log.dir.mws" location="${webMethods.home}/MWS/server/default/logs" />
+	<property name="log.dir.ae" location="${webMethods.home}/optimize/analysis/logs" />
+	<property name="log.dir.wsdc" location="${webMethods.home}/optimize/dataCollector/logs" />
+	<property name="log.dir.spm" location="${webMethods.home}/profiles/SPM/logs" />
+	<property name="log.dir.cce" location="${webMethods.home}/profiles/CCE/logs" />
+	<property name="log.dir.um" location="${webMethods.home}/UniversalMessaging/server/${instanceNameUM}/data" />
+	<property name="log.dir.umSvc" location="${webMethods.home}/UniversalMessaging/server/${instanceNameUM}/bin" />
+
+	<!-- Where to move log files -->
+	<property name="archive.home" location="${webMethods.home}/archive/logs" />
+	<property name="archive.log.dir.is" location="${archive.home}/IntegrationServer${log.dir.is.instance}" />
+	<property name="archive.log.dir.mws" location="${archive.home}/MWS/" />
+	<property name="archive.log.dir.ae" location="${archive.home}/optimize/analysis" />
+	<property name="archive.log.dir.wsdc" location="${archive.home}/optimize/dataCollector" />
+	<property name="archive.log.dir.spm" location="${archive.home}/SPM" />
+	<property name="archive.log.dir.cce" location="${archive.home}/CCE" />
+	<property name="archive.log.dir.um" location="${archive.home}/UniversalMessaging/${instanceNameUM}" />
+	<property name="archive.log.dir.umSvc" location="${archive.log.dir.um}" />
+
+	<property name="zip.instance.is" value="" />
+	<property name="zip.instance.mws" value="" />
+	<property name="zip.instance.ae" value="" />
+	<property name="zip.instance.wsdc" value="" />
+	<property name="zip.instance.spm" value="" />
+	<property name="zip.instance.cce" value="" />
+	<property name="zip.instance.um" value="_${instanceNameUM}" />
+	<property name="zip.instance.umSvc" value="${zip.instance.um}" />
+
+	<!-- Which log files to grab -->
+	<patternset id="is-log-files-pattern">
+		
+		<!-- All files with standard roll-over -->
+		<include name="*.log.*" />
+		
+		<include name="FailedAudit_*.log" />
+		<exclude name="FailedAudit_${currentDate}_*.log" />
+		<exclude name="FailedAudit.log" />
+
+		<include name="RepoV4Error*.log" />
+		<exclude name="RepoV4Error.log" />
+		<exclude name="RepoV4Error${currentDate}.log" />
+
+		<include name="stats*.log" />
+		<exclude name="stats.log" />
+		<exclude name="stats${currentDate}.log" />
+
+		<include name="WMERROR*.log" />
+		<exclude name="WMERROR_${currentDate}_*.log" />
+
+		<include name="WMSERVICE*.log" />
+		<exclude name="WMSERVICE_${currentDate}_*.log" />
+
+		<include name="WMSESSION*.log" />
+		<exclude name="WMSESSION_${currentDate}_*.log" />
+
+		<include name="WMTXIN*.log" />
+		<exclude name="WMTXIN_${currentDate}_*.log" />
+
+		<include name="WMTXOUT*.log" />
+		<exclude name="WMTXOUT_${currentDate}_*.log" />
+	</patternset>
+
+	<patternset id="mws-log-files-pattern">
+	
+		<!-- All files with standard roll-over -->
+		<include name="*.log.*" />
+	</patternset>
+
+	<patternset id="ae-log-files-pattern">
+		<include name="error.log.*" />
+		<include name="info.log.*" />
+		<include name="server.log.*" />
+		<include name="wrapper.log.*" />
+	</patternset>
+
+	<patternset id="wsdc-log-files-pattern" refid="ae-log-files-pattern" />
+
+	<patternset id="spm-log-files-pattern">
+		<include name="default.log.*" />
+		<include name="error.log.*" />
+		<include name="instances.log.*" />
+		<include name="monitoring.log.*" />
+		<include name="osgi-platform.log.*" />
+		<include name="progress.txt.*" />
+		<include name="sd-provisioning.log.*" />
+		<include name="sum-provisioning.log.*" />
+		<include name="templates.log.*" />
+		<include name="wrapper.log.*" />
+	</patternset>
+	
+	<patternset id="cce-log-files-pattern" refid="spm-log-files-pattern" />
+	
+	<patternset id="um-log-files-pattern">
+		<include name="nirvana.log_*" />
+	</patternset>
+	
+	<patternset id="umSvc-log-files-pattern">
+		<include name="UMRealmService.log.*" />
+	</patternset>
+
+	<!-- = = = = = = = = = = = = = = = = =
+	macrodef: echopath
+	= = = = = = = = = = = = = = = = = -->
+	<macrodef name="echopath">
+		<attribute name="pathid" />
+		<sequential>
+			<property name="line.pathprefix" value="| |-- " />
+			<pathconvert pathsep="${line.separator}${line.pathprefix}" property="echo.@{pathid}" refid="@{pathid}">
+			</pathconvert>
+			<echo>Path @{pathid}${line.separator}${line.pathprefix}${echo.@{pathid}}</echo>
+		</sequential>
+	</macrodef>
+
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: compArchive          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="compArchive">
+		<attribute name="compName" />
+		<sequential>
+			<antcontrib:var name="logdir.present" unset="true" />
+			<available file="${log.dir.@{compName}}" property="logdir.present" />
+			<antcontrib:if>
+				<isset property="logdir.present" />
+				<then>
+					<path id="path.@{compName}.logfiles">
+						<fileset id="@{compName}-log-files" dir="${log.dir.@{compName}}">
+							<patternset refid="@{compName}-log-files-pattern" />
+						</fileset>
+					</path>
+
+					<echopath pathid="path.@{compName}.logfiles" />
+					<mkdir dir="${archive.log.dir.@{compName}}" />
+
+					<antcontrib:if>
+						<equals arg1="${createZIP}" arg2="true" />
+						<then>
+							<zip destfile="${archive.home}/@{compName}${zip.instance.@{compName}}_${currentDateFileName}.zip">
+								<fileset refid="@{compName}-log-files" />
+							</zip>
+						</then>
+					</antcontrib:if>
+
+					<antcontrib:for param="file" keepgoing="true">
+						<fileset refid="@{compName}-log-files" />
+						<sequential>
+							<move file="@{file}" todir="${archive.log.dir.@{compName}}" failonerror="false" />
+						</sequential>
+					</antcontrib:for>
+				</then>
+				<else>
+					<echo level="info" message="Component @{compName} not installed (directory '${log.dir.@{compName}}' does not exist)" />
+				</else>
+			</antcontrib:if>
+		</sequential>
+	</macrodef>
+
+	<!-- ================================= 
+          target: delete              
+         ================================= -->
+	<target name="delete" depends="archive, deleteRaw, deleteZIP" description="Delete all files that have expired" />
+
+
+
+	<!-- ================================= 
+          target: deleteRaw              
+         ================================= -->
+	<target name="deleteRaw" depends="archive" description="Delete archived raw (i.e. non-ZIP) log files older than retention period">
+		<echo>Retention period for raw files is ${retentionDays} days. All non-ZIP files in ${archive.home} older than that will be deleted</echo>
+		<tstamp>
+			<format property="retention" pattern="MM/dd/yyyy hh:mm aa" locale="en,UK" offset="-${retentionDays}" unit="day" />
+		</tstamp>
+		<delete verbose="true">
+			<fileset dir="${archive.home}" excludes="**/*.zip">
+				<date datetime="${retention}" when="before" />
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- ================================= 
+          target: deleteZIP              
+         ================================= -->
+	<target name="deleteZIP" depends="archive" description="Delete ZIP archives older than retention period">
+		<echo>Retention period for ZIP files is ${retentionDaysZIP} days. All ZIP files in ${archive.home} older than that will be deleted</echo>
+		<tstamp>
+			<format property="retentionZip" pattern="MM/dd/yyyy hh:mm aa" locale="en,UK" offset="-${retentionDaysZIP}" unit="day" />
+		</tstamp>
+		<delete verbose="true">
+			<fileset dir="${archive.home}" includes="**/*.zip">
+				<date datetime="${retentionZip}" when="before" />
+			</fileset>
+		</delete>
+	</target>
+
+
+	<target name="archive">
+		<compArchive compName="is" />
+		<compArchive compName="mws" />
+		<compArchive compName="ae" />
+		<compArchive compName="wsdc" />
+		<compArchive compName="spm" />
+		<compArchive compName="cce" />
+		<compArchive compName="um" />
+		<compArchive compName="umSvc" />
+	</target>
+
+</project>
+

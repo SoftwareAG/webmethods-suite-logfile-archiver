@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project name="LogArchiver" default="createArchive" basedir="." >
+	<description>Log file archiver for webMethods components</description>
+
+	<property environment="env" />
+	<condition property="webMethods.home" value="${env.WEBMETHODS_HOME}">
+		<not>
+			<isset property="webMethods.home" />
+		</not>
+	</condition>
+	
+	<tstamp>
+		<format property="current.date" pattern="yyyy-MM-dd" />
+	</tstamp>
+	<property file="build.properties" />
+	<property name="file.name" value="webMethods-LogArchiver_${VERSION_NUMBER}" />
+	<property name="src.dir" location="src" />
+	<property name="dist.dir" location="dist" />
+	<property name="install.dir" location="${webMethods.home}/tools/operations/logArchiver" />
+	
+
+	<fileset id="src" dir="${src.dir}">
+		<include name="**/*" />
+	</fileset>
+
+
+	<!-- ================================= 
+          target: install
+         ================================= -->
+	<target name="install" depends="" description="Install" if="webMethods.home">
+		
+		<mkdir dir="${install.dir}"/>
+		<copy destdir="${install.dir}" >
+			<fileset refid="src" />
+		</copy>
+	</target>
+	
+	<!-- ================================= 
+          target: createArchive              
+         ================================= -->
+	<target name="createArchive" depends="" description="Create an archive">
+		<delete dir="${dist.dir}" failonerror="false" />
+		<mkdir dir="${dist.dir}"/>
+		<zip destfile="${dist.dir}/${file.name}.zip" >
+			<fileset refid="src" />
+		</zip>
+	</target>
+
+</project>
