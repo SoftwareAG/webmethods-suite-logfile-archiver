@@ -28,8 +28,8 @@ Archive and (after a customizable retention period) delete log files from webMet
 
 ## Installation
 
-- Build ZIP file (will be placed into `./dist`) for manual installation by simply calling Ant with the default target: `ant`
-- Install on current system 
+- Option 1: Build ZIP file (will be placed into `./dist`) for manual installation by simply calling Ant with the default target: `ant`
+- Option 2: Install on current system 
   - Default location (`$WEBMETHODS_HOME/tools/operations`): `ant install`
   - Custom installation directory: `ant -Dinstall.dir=<CUSTOM_INSTALL_DIR> install` 
 
