@@ -17,7 +17,7 @@ Archive and (after a customizable retention period) delete log files from webMet
 
 ## Prerequisites
 
-- Install [Apache Ant](https://ant.apache.org) version 1.7 or higher
+- Install [Apache Ant](https://ant.apache.org) version 1.7 or higher, including [ant-contrib](http://ant-contrib.sourceforge.net/)
 - Configure the following environment variables
   - `ANT_HOME` pointing to your Ant installation location
   - `WEBMETHODS_HOME` pointing to the location directory of the webMethods suite
