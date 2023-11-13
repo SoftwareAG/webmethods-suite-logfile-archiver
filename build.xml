@@ -53,7 +53,7 @@
 	<target name="install" depends="" description="Install" if="webMethods.home">
 		
 		<mkdir dir="${install.dir}"/>
-		<copy destdir="${install.dir}" >
+		<copy todir="${install.dir}" >
 			<fileset refid="src" />
 		</copy>
 	</target>
