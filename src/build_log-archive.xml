@@ -64,8 +64,13 @@
 	<property name="instancesNameIS" value="default" />
 
 	<!-- Does Integration Server need special handling because version is 9.6 or higher? -->
+	<!-- If this is an IS installation with an instance, use the directory from there ... -->
 	<available file="${webMethods.home}/IntegrationServer/instances/${instancesNameIS}" property="log.dir.is.instance" value="/instances/${instancesNameIS}" />
+	<!-- ... otherwise assume an older IS version or a Microservices Runtime (MSR) installation
+		(since Ant properties are immutable, this assignment will only be effective, if no
+		"instance" was found) -->
 	<property name="log.dir.is.instance" value="" />
+	<!-- If an IS instance is found, put its name into the name of the ZIP file  -->
 	<available file="${webMethods.home}/IntegrationServer/instances/${instancesNameIS}" property="zip.instance.is" value="_${instancesNameIS}" />
 	
 	<!-- Name of Universal Messaging instance  -->
@@ -280,4 +285,3 @@
 	</target>
 
 </project>
-
