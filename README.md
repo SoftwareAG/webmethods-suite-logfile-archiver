@@ -4,7 +4,8 @@ Archive and (after a customizable retention period) delete log files from webMet
 - Main logic implemented as Ant script for portability
   - Invocation directly or via convenience scripts (Windows batch file and shell script)
   - Support for
-    - Integration Server
+    - Integration Server and Microservices Runtime
+    - Universal Messaging
     - MWS
     - Optimize
       - Analytic Engine
