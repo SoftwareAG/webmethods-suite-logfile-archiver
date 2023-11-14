@@ -1,4 +1,5 @@
 # webMethods Suite Logfile Archiver
+
 Archive and (after a customizable retention period) delete log files from webMethods Suite products
 
 - Main logic implemented as Ant script for portability
@@ -15,7 +16,6 @@ Archive and (after a customizable retention period) delete log files from webMet
       - SPM
     - Other components can be added via configuration
 
-
 ## Prerequisites
 
 - Install [Apache Ant](https://ant.apache.org) version 1.7 or higher, including [ant-contrib](http://ant-contrib.sourceforge.net/)
@@ -30,17 +30,17 @@ Archive and (after a customizable retention period) delete log files from webMet
 ## Installation
 
 - Option 1: Build ZIP file (will be placed into `./dist`) for manual installation by simply calling Ant with the default target: `ant`
-- Option 2: Install on current system 
+- Option 2: Install on current system
   - Default location (`$WEBMETHODS_HOME/tools/operations`): `ant install`
-  - Custom installation directory: `ant -Dinstall.dir=<CUSTOM_INSTALL_DIR> install` 
+  - Custom installation directory: `ant -Dinstall.dir=<CUSTOM_INSTALL_DIR> install`
 
 ## Usage
 
 The script files' (`run_log-archive.bat` and `run_log-archive.sh`) logic is such that on a normal system no further setup work is required. But on systems where a more elaborate configuration exists, those specifics are taken into account. Therefore the following environment variables are used (if they are all defined, the archiver files can be stored anywhere):
 
 - `WEBMETHODS_HOME`: Installation location of the webMethods Suite for which the log files should be archived. If not defined, it will be assumed that the script is installed in `$WEBMETHODS_HOME/tools/operations/logArchiver` and the value derived from that.
-- `JAVA_HOME`: 
-  - On Linux only and if it is not set, the script uses the contents of `/etc/profile.d/jdk.sh` if it exists. 
+- `JAVA_HOME`:
+  - On Linux only and if it is not set, the script uses the contents of `/etc/profile.d/jdk.sh` if it exists.
   - If not defined, the JVM that comes with the webMethods Suite will be used (depends on name of JVM folder and may therefore not work on all versions of the webMethods Suite).
 - `ANT_HOME`:
   - On Linux only and if it is not set, the script uses the contents of `/etc/profile.d/ant.sh` if it exists.
@@ -52,16 +52,15 @@ It is also an option to run the Ant script from a Continuous Integration server 
 
 On Windows systems there have been cases where, due to file locks, log files could only be moved one or several days after that should have happened. While this delay may be a bit annoying, it is usually not a real problem.
   
-
 ## Parameters
 
 The behavior is controlled by Ant properties with defaults being in the script. Those defaults can be overridden from the command line by using standard Ant syntax.
 
 Example:
 
-````
+```bash
 ant -f build_log-archive.xml -DretentionDays=12
-````
+```
 
 The following parameters can be used
 
