@@ -1,6 +1,6 @@
 @echo off
 
-rem   (c) Copyright 2012-2019 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
+rem   (c) Copyright 2012-2023 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
 rem   Reston, United States of America, and/or their suppliers.
 rem   http://www.softwareag.com
 rem

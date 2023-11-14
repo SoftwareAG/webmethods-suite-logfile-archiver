@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# (c) Copyright 2012-2019 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
+# (c) Copyright 2012-2023 Software AG, Darmstadt, Germany and/or Software AG USA  Inc.,
 # Reston, United States of America, and/or their suppliers.
 # http://www.softwareag.com
 #
