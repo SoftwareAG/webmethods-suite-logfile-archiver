@@ -72,7 +72,7 @@ rem   If no installation directory is defined or provided,
 rem   determine it from this script's location, assuming the
 rem   script is installed in $WEBMETHODS_HOME/tools/operations/logArchiver
 if "%WEBMETHODS_HOME%"=="" (
-	WEBMETHODS_HOME=%~dp0..\..\..
+	set WEBMETHODS_HOME=%~dp0..\..\..
 )
 
 
