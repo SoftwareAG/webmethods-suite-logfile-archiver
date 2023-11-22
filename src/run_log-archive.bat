@@ -20,12 +20,12 @@ rem   limitations under the License.
 
 
 rem   NAME
-rem       run_log-archive.sh - Archive and, where appropriate, delete log files
+rem       run_log-archive.bat - Archive and, where appropriate, delete log files
 rem  
 rem  
 rem   SYNOPSIS
 rem  
-rem       run_log-archive.sh [WEBMETHODS_HOME]
+rem       run_log-archive.bat [WEBMETHODS_HOME]
 rem  
 rem  
 rem   DESCRIPTION
@@ -58,8 +58,8 @@ rem   (The default in the Ant script is 30 days and will be overriden with this 
 set RETENTION_DAYS=30
 
 
-set CHECK_ANT_INSTALLATIONS=..\apache-ant ..\..\common\AssetBuildEnvironment\ant
-set CHECK_JAVA_INSTALLATIONS=..\..\jvm\jvm180_64 ..\..\jvm\jvm180_32 ..\..\jvm\jvm180
+set CHECK_ANT_INSTALLATIONS=..\..\..\common\lib\ant ..\apache-ant ..\..\..\common\AssetBuildEnvironment\ant
+set CHECK_JAVA_INSTALLATIONS=..\..\..\jvm\jvm ..\..\..\jvm\jvm180_64 ..\..\..\jvm\jvm180_32 ..\..\..\jvm\jvm180
 
 
 rem   Use optional command line argument to specify/override the 
@@ -126,7 +126,7 @@ if "%JAVA_HOME%"=="" (
 
 set ANT_CMD="%ANT_HOME%\bin\ant.bat"
 
-call %ANT_CMD% -f build_log-archive.xml -DretentionDays=%RETENTION_DAYS% -DwebMethods.home="%WEBMETHODS_HOME%" 
+call %ANT_CMD% -lib %ANT_HOME% -f build_log-archive.xml -DretentionDays=%RETENTION_DAYS% -DwebMethods.home="%WEBMETHODS_HOME%" 
 
 
 :end
