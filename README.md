@@ -34,6 +34,17 @@ Archive and (after a customizable retention period) delete log files from webMet
   - Default location (`$WEBMETHODS_HOME/tools/operations`): `ant install`
   - Custom installation directory: `ant -Dinstall.dir=<CUSTOM_INSTALL_DIR> install`
 
+Currently for Windows systems only, there is also a batch file ([install.bat](install.bat)) to perform the installation.
+
+- If you used the default location (`c:\SoftwareAG`) or have set the environment variable `WEBMETHODS_HOME` to point to your installation you simply run it
+
+  >``install.bat``
+
+- Otherwise you must specify the location of the webMethods installation as a parameter
+
+  >``install.bat WEBMETHODS_INSTALLATION``
+
+
 ## Usage
 
 The script files' (`run_log-archive.bat` and `run_log-archive.sh`) logic is such that on a normal system no further setup work is required. But on systems where a more elaborate configuration exists, those specifics are taken into account. Therefore the following environment variables are used (if they are all defined, the archiver files can be stored anywhere):
