@@ -124,6 +124,8 @@ if "%JAVA_HOME%"=="" (
 	echo JAVA_HOME = "%JAVA_HOME%"
 )
 
+set PATH=%PATH%;%JAVA_HOME%\bin
+
 set ANT_CMD="%ANT_HOME%\bin\ant.bat"
 
 call %ANT_CMD% -lib %ANT_HOME% -f build_log-archive.xml -DretentionDays=%RETENTION_DAYS% -DwebMethods.home="%WEBMETHODS_HOME%" 
