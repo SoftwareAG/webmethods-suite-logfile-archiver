@@ -58,7 +58,7 @@
 	<property name="retentionDays" value="30" />
 
 	<!-- Number of days after which to delete archived raw files (not ZIP files) -->
-	<property name="retentionDaysZIP" value="60" />
+	<property name="retentionDaysZIP" value="3660" />
 
 	<!-- Name of Integration Server instance (only for v9.6 or higher) -->
 	<property name="instancesNameIS" value="default" />

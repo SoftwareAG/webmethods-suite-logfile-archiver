@@ -80,7 +80,7 @@ The following parameters can be used
 | `webMethods.home` | OS environment variable `$WEBMETHODS_HOME` | Valid path | Location of the webMethods installation | 1.0 |
 | `createZIP` | true | true/false | Should a ZIP be created per invocation | 1.1 |
 | `retentionDays` | 30 | positive number | Number after which log files (not ZIP) shall be deleted | 1.0 |
-| `retentionDaysZIP` | 60 | positive number | Number after which ZIP archives shall be deleted | 1.1 |
+| `retentionDaysZIP` | 3660 | positive number | Number after which ZIP archives shall be deleted | 1.1 |
 | `instancesNameIS` | default | text | Name of IS instance for which files shall be archived | 1.1 |
 | `instanceNameUM` | umserver | text | Name of UM server instance for which file shall be archived | 1.2 |
 
