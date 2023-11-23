@@ -63,9 +63,9 @@ else
 fi
 
 
-CHECK_ANT_INSTALLATIONS="../apache-ant ../../common/AssetBuildEnvironment/ant"
+CHECK_ANT_INSTALLATIONS="../../../common/lib/ant ../apache-ant ../../../common/AssetBuildEnvironment/ant"
 CHECK_ANT_PROFILE="/etc/profile.d/ant.sh"
-CHECK_JAVA_INSTALLATIONS="../../jvm/jvm180_64 ../../jvm/jvm180_32 ../../jvm/jvm180"
+CHECK_JAVA_INSTALLATIONS="../../../jvm/jvm ../../../jvm/jvm180_64 ../../../jvm/jvm180_32 ../../../jvm/jvm180"
 CHECK_JAVA_PROFILE="/etc/profile.d/jdk.sh"
 
 # Use optional command line argument to specify/override the 
