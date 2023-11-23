@@ -153,4 +153,4 @@ ANT_CMD="$ANT_HOME/bin/ant"
 
 CURRENT_DIR=`dirname $0`
 
-$ANT_CMD -f $CURRENT_DIR/build_log-archive.xml -DretentionDays=$RETENTION_DAYS -DretentionDaysZIP=$RETENTION_DAYS_ZIP -DwebMethods.home="$WEBMETHODS_HOME"
+$ANT_CMD -lib $ANT_HOME -f $CURRENT_DIR/build_log-archive.xml -DretentionDays=$RETENTION_DAYS -DretentionDaysZIP=$RETENTION_DAYS_ZIP -DwebMethods.home="$WEBMETHODS_HOME"
