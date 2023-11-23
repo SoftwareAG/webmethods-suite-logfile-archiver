@@ -43,10 +43,12 @@ rem            If not set (either system-wide or from the command line), it will
 rem            be if checked if webMethods is installed at the default location
 rem  
 rem       JAVA_HOME
-rem            The JVM that comes with the webMethods Suite will be used.
+rem            If not set (either system-wide or from the command line),
+rem            the JVM that comes with the webMethods Suite will be used.
 rem  
 rem       ANT_HOME
-rem            The Ant installation that comes with the webMethods Suite will be used.
+rem            If not set (either system-wide or from the command line),
+rem            the Ant installation that comes with the webMethods Suite will be used.
 rem  
 
 setlocal
