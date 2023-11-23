@@ -147,6 +147,8 @@ else
 	echo JAVA_HOME = "$JAVA_HOME"
 fi
 
+PATH=$PATH:$JAVA_HOME/bin
+
 ANT_CMD="$ANT_HOME/bin/ant"
 
 
