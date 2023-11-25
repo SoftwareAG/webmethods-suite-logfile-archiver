@@ -116,9 +116,17 @@
 		<exclude name="FailedAudit_${currentDate}_*.log" />
 		<exclude name="FailedAudit.log" />
 
+		<include name="http*.log" />
+		<exclude name="http.log" />
+		<exclude name="http${currentDate}*.log" />
+
 		<include name="RepoV4Error*.log" />
 		<exclude name="RepoV4Error.log" />
 		<exclude name="RepoV4Error${currentDate}.log" />
+
+		<include name="stats*.csv" />
+		<exclude name="stats.csv" />
+		<exclude name="stats${currentDate}*.csv" />
 
 		<include name="stats*.log" />
 		<exclude name="stats.log" />
